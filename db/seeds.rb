@@ -7,3 +7,8 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+
+["ICN", "SHA", "SZX", "AYT", "ZRH", "IAD"].each do |code|
+    Airport.find_or_create_by!(code: code)
+end
