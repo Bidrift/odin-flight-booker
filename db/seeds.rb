@@ -8,7 +8,22 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+airports_list = ["ICN", "SHA", "SZX", "AYT", "ZRH", "IAD"]
 
-["ICN", "SHA", "SZX", "AYT", "ZRH", "IAD"].each do |code|
+airports_list.each do |code|
     Airport.find_or_create_by!(code: code)
+end
+
+1000.times do |x|
+    departure_airport, arrival_airport = Airport.all.sample(2).map(&:id)
+    departure_time = DateTime.now + (x+2).hour
+    duration = ((1+rand(6)).hours + (rand(12)*5).minutes).in_minutes.to_i
+    status = :ontime
+
+
+    Flight.find_or_create_by!(departure_airport_id: departure_airport,
+        arrival_airport_id: arrival_airport,
+        departure_time: departure_time,
+        duration: duration,
+        status: status)
 end
