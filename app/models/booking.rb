@@ -4,6 +4,8 @@ class Booking < ApplicationRecord
 
   validate :has_passengers
 
+  accepts_nested_attributes_for :passengers
+
   private
     def has_passengers
       if passengers.none?

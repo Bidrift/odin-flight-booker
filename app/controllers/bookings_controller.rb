@@ -6,12 +6,13 @@ class BookingsController < ApplicationController
             return
         end
         @booking = Booking.new(flight_id: booking_params[:flight_id])
-        @passengers = Array.new
-        booking_params[:passengers].to_i.times { @passengers << @booking.passengers.build }
+        @passengers_count = booking_params[:passengers_count]
+        @passengers_count.to_i.times { @booking.passengers.build }
     end
 
     def create
         @booking = Booking.new(booking_create_params)
+        @passengers_count = booking_params[:passengers_count]
         if @booking.save
             redirect_to booking_path
         else
@@ -26,18 +27,18 @@ class BookingsController < ApplicationController
     private
 
     def booking_params
-        params.expect(booking: [:flight_id, :passengers])
-        return false if params[:booking][:flight_id].nil? || params[:booking][:passengers].nil?
-        params.expect(booking: [:flight_id, :passengers])
+        params.expect(booking: [:flight_id, :passengers_count])
+        return false if params[:booking][:flight_id].nil? || params[:booking][:passengers_count].nil?
+        params.expect(booking: [:flight_id, :passengers_count])
     rescue ActionController::ParameterMissing
         return false
     end
 
     def booking_passenger_params
-        params.expect(booking: [:flight_id, :passengers, passenger: [[:name, :email]]])
+        params.expect(booking: [:flight_id, :passengers_count, passengers_attributes: [[:name, :email]]])
     end
 
     def booking_create_params
-        params.expect(booking: [:flight_id, passenger: [[:name, :email]]])
+        params.expect(booking: [:flight_id, passengers_attributes: [[:name, :email]]])
     end
 end

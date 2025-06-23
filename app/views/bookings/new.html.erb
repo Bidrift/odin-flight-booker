@@ -1,7 +1,4 @@
-<h1>New booking for flight #<%= @booking.flight_id %> with <%= @passengers.count %> passengers</h1>
-
-
-
+<h1>New booking for flight #<%= @booking.flight_id %> with <%= pluralize(@passengers_count, 'passenger') %></h1>
 <div style="border: 1px solid black; margin: 10px 10px; padding: 20px;">
     <h2>Flight information</h2>
     <%= render partial: "flights/flight", locals: { flight: Flight.find(@booking.flight_id) } %>
@@ -10,17 +7,15 @@
 <div style="border: 1px solid black; margin: 10px 10px; padding: 20px;">
     <h2>Booking information</h2>
     <%= form_with model: @booking do |form| %>
-        <%= form.hidden_field :passengers, value: @passengers.count %>
+        <%= form.hidden_field :passengers_count, value: @booking.passengers.size %>
         <%= form.hidden_field :flight_id, value: @booking.flight_id %>
-        <% @passengers.each_with_index do |passenger, id| %>
-            <%= form.fields_for passenger, index: id do |passenger_form| %>
+            <%= form.fields_for :passengers do |passenger_form| %>
                 <div>
-                    <h3>Passenger <%= id + 1 %></h3>
+                    <h3>Passenger <%= passenger_form.index + 1 %></h3>
                     <p><%= passenger_form.label :name, "Passenger name" %> <%= passenger_form.text_field :name, required: true, minlength: 4, maxlength: 16 %></p>
                     <p><%= passenger_form.label :email, "Passenger email" %> <%= passenger_form.email_field :email, required: true %></p>
                 </div>
             <% end %>
-        <% end %>
         <%= form.submit "Confirm Booking"%>
     <% end %>
 </div>

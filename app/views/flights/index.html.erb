@@ -13,7 +13,7 @@
 
     <h2>Available flights based on the search</h2>
     <%= form_for :booking, url: new_booking_path, method: :get do |f| %>
-        <%= f.hidden_field :passengers, value: @passengers %>
+        <%= f.hidden_field :passengers_count, value: @passengers %>
         <% @flights.each do |flight| %>
             <%= f.label :flight_id, value: flight.id do %>
                 <div style="border: 1px solid black; margin: 10px 10px; padding: 20px;">
