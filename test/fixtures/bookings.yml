@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  flight: one
+  booker: one
+  passenger: one
+  status: 1
+
+two:
+  flight: two
+  booker: two
+  passenger: two
+  status: 1
