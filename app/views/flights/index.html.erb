@@ -17,17 +17,7 @@
         <% @flights.each do |flight| %>
             <%= f.label :flight_id, value: flight.id do %>
                 <div style="border: 1px solid black; margin: 10px 10px; padding: 20px;">
-                    <p>Flight from <strong><%= flight.departure_airport.code %></strong> to <strong><%= flight.arrival_airport.code %></strong></p>
-                    <p>Estimated departure: <strong><%= flight.departure_time.strftime("%H:%M") %></strong> on <em><%= flight.departure_time.strftime("%d %b %Y, %a") %></em></p>
-                    <p>Flight duration: <strong>
-                        <% duration_converted = Time.at(flight.duration.minutes - 1.day).utc %>
-                        <% duration_text = Array.new %>
-                        
-                        <% duration_text.push(pluralize(duration_converted.day, 'day')) if duration_converted.day != 31 %>
-                        <% duration_text.push(pluralize(duration_converted.hour, 'hour')) if duration_converted.hour != 0 %>
-                        <% duration_text.push(pluralize(duration_converted.min, 'minute')) if duration_converted.min != 0 %>
-                        <%= duration_text.join(" and ") %>
-                    </strong></p>
+                    <%= render partial: "flight", locals: { flight: flight } %> 
                     <%= f.radio_button :flight_id, flight.id, required: true %> <span>Select this flight</span>
                 </div>
             <% end %>
