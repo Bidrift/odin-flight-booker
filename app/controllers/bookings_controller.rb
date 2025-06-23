@@ -11,7 +11,12 @@ class BookingsController < ApplicationController
     end
 
     def create
-
+        @booking = Booking.new(booking_create_params)
+        if @booking.save
+            redirect_to booking_path
+        else
+            render :new, status: :unprocessable_entity
+        end
     end
 
     def show
@@ -26,5 +31,13 @@ class BookingsController < ApplicationController
         params.expect(booking: [:flight_id, :passengers])
     rescue ActionController::ParameterMissing
         return false
+    end
+
+    def booking_passenger_params
+        params.expect(booking: [:flight_id, :passengers, passenger: [[:name, :email]]])
+    end
+
+    def booking_create_params
+        params.expect(booking: [:flight_id, passenger: [[:name, :email]]])
     end
 end

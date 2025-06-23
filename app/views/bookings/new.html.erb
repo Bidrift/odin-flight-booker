@@ -10,6 +10,8 @@
 <div style="border: 1px solid black; margin: 10px 10px; padding: 20px;">
     <h2>Booking information</h2>
     <%= form_with model: @booking do |form| %>
+        <%= form.hidden_field :passengers, value: @passengers.count %>
+        <%= form.hidden_field :flight_id, value: @booking.flight_id %>
         <% @passengers.each_with_index do |passenger, id| %>
             <%= form.fields_for passenger, index: id do |passenger_form| %>
                 <div>
