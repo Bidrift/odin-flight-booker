@@ -8,6 +8,11 @@ class Flight < ApplicationRecord
 
   enum :status, { ontime: 0, checkin: 1, boarding: 2, delayed: 3, cancelled: 4, departed: 5 }
 
+  scope :departing_from, ->(airport_id) { where(departure_airport_id: airport_id) }
+  scope :arriving_to, ->(airport_id) { where(arrival_airport_id: airport_id) }
+  scope :on_day, ->(day) { where(departure_time: day..(day + 1.day)) }
+  scope :search_flights, ->(flight) { departing_from(flight.departure_airport_id).arriving_to(flight.arrival_airport_id).on_day(flight.departure_time) }
+
   private
 
   def departure_time_cannot_be_in_the_past
