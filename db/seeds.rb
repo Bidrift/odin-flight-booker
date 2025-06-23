@@ -16,7 +16,7 @@ end
 
 1000.times do |x|
     departure_airport, arrival_airport = Airport.all.sample(2).map(&:id)
-    departure_time = DateTime.now + (x+2).hour
+    departure_time = DateTime.now + 2.hours + (10*x).minutes
     duration = ((1+rand(6)).hours + (rand(12)*5).minutes).in_minutes.to_i
     status = :ontime
 
