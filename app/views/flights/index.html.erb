@@ -1,0 +1,6 @@
+<%= simple_form_for @flight, url: flights_path, method: :get do |f| %>
+    <%= f.input :departure_airport_id, as: :select, collection: @airports, label_method: :second, value_method: :first %>
+    <%= f.input :arrival_airport_id, as: :select, collection: @airports, label_method: :second, value_method: :first %>
+    <%= f.input :departure_time, as: :date, html5: true, input_html: { min: Date.today } %>
+    <%= f.submit "Search flights" %>
+<% end %>
