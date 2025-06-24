@@ -14,7 +14,7 @@ class BookingsController < ApplicationController
         @booking = Booking.new(booking_create_params)
         @passengers_count = booking_params[:passengers_count]
         if @booking.save
-            redirect_to booking_path
+            redirect_to booking_path @booking
         else
             render :new, status: :unprocessable_entity
         end
