@@ -43,22 +43,22 @@ The application will be usually in http://localhost:3000
 During the development of this project, I used the following stack:
 
 - Ruby on Rails: `8.0.2v`
-- Gem [simple_form][https://github.com/heartcombo/simple_form]
+- Gem [simple_form](https://github.com/heartcombo/simple_form)
 
 # Demo (screenshots)
 
 - Flight search
 
-![flight search][https://i.imgur.com/iHr2JaR.png]
+![flight search](https://i.imgur.com/iHr2JaR.png)
 
 - Flight selection
 
-![flight selection][https://i.imgur.com/5XqCvXJ.png]
+![flight selection](https://i.imgur.com/5XqCvXJ.png)
 
 - Booking form
 
-![booking form][https://i.imgur.com/SyKFQXi.png]
+![booking form](https://i.imgur.com/SyKFQXi.png)
 
 - Booking information
 
-![booking info][https://i.imgur.com/7kp4dTc.png]
+![booking info](https://i.imgur.com/7kp4dTc.png)
