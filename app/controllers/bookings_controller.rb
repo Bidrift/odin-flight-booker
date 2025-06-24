@@ -21,7 +21,10 @@ class BookingsController < ApplicationController
     end
 
     def show
-
+        @booking = Booking.find_by(id: booking_get_params)
+        unless @booking
+            redirect_to flights_path
+        end
     end
 
     private
@@ -40,5 +43,9 @@ class BookingsController < ApplicationController
 
     def booking_create_params
         params.expect(booking: [:flight_id, passengers_attributes: [[:name, :email]]])
+    end
+
+    def booking_get_params
+        params.expect(:id)
     end
 end
