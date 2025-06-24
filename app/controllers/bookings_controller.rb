@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
     def new
         unless booking_params
-            flash['alert'] = "Missing booking parameters, select flight and number of passengers"
+            flash["alert"] = "Missing booking parameters, select flight and number of passengers"
             redirect_to flights_path
             return
         end
@@ -30,19 +30,19 @@ class BookingsController < ApplicationController
     private
 
     def booking_params
-        params.expect(booking: [:flight_id, :passengers_count])
+        params.expect(booking: [ :flight_id, :passengers_count ])
         return false if params[:booking][:flight_id].nil? || params[:booking][:passengers_count].nil?
-        params.expect(booking: [:flight_id, :passengers_count])
+        params.expect(booking: [ :flight_id, :passengers_count ])
     rescue ActionController::ParameterMissing
-        return false
+        false
     end
 
     def booking_passenger_params
-        params.expect(booking: [:flight_id, :passengers_count, passengers_attributes: [[:name, :email]]])
+        params.expect(booking: [ :flight_id, :passengers_count, passengers_attributes: [ [ :name, :email ] ] ])
     end
 
     def booking_create_params
-        params.expect(booking: [:flight_id, passengers_attributes: [[:name, :email]]])
+        params.expect(booking: [ :flight_id, passengers_attributes: [ [ :name, :email ] ] ])
     end
 
     def booking_get_params

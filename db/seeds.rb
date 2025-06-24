@@ -8,7 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-airports_list = ["ICN", "SHA", "SZX", "AYT", "ZRH", "IAD"]
+airports_list = [ "ICN", "SHA", "SZX", "AYT", "ZRH", "IAD" ]
 
 airports_list.each do |code|
     Airport.find_or_create_by!(code: code)
