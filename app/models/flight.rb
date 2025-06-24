@@ -12,7 +12,8 @@ class Flight < ApplicationRecord
   scope :departing_from, ->(airport_id) { where(departure_airport_id: airport_id) }
   scope :arriving_to, ->(airport_id) { where(arrival_airport_id: airport_id) }
   scope :on_day, ->(day) { where(departure_time: day..(day + 1.day)) }
-  scope :search_flights, ->(flight) { departing_from(flight.departure_airport_id).arriving_to(flight.arrival_airport_id).on_day(flight.departure_time) }
+  scope :buyable_status, ->{ ontime.or(checkin) }
+  scope :search_flights, ->(flight) { departing_from(flight.departure_airport_id).arriving_to(flight.arrival_airport_id).on_day(flight.departure_time).buyable_status }
 
   private
 
