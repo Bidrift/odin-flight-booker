@@ -4,12 +4,20 @@ class Booking < ApplicationRecord
 
   validate :has_passengers
 
+  validate :has_no_more_than_4_passengers
+
   accepts_nested_attributes_for :passengers
 
   private
     def has_passengers
       if passengers.none?
         errors.add(:booking, "must have at least one passenger")
+      end
+    end
+
+    def has_no_more_than_4_passengers
+      if passengers.size > 4
+        errors.add(:passengers, "must not be over 4")
       end
     end
 end
