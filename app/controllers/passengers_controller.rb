@@ -3,8 +3,9 @@ class PassengersController < ApplicationController
         @passenger = Passenger.new(passenger_params)
         respond_to do |format|
             if @passenger.save
-                format.turbo_stream { render turbo_stream: turbo_stream.append('passengers', @passenger)}
+                format.turbo_stream { render turbo_stream: [turbo_stream.append('passengers-list', @passenger), ]}
             else
+                logger.debug(@passenger.errors.full_messages)
                 head(:unprocessable_entity)
             end
         end
@@ -25,6 +26,6 @@ class PassengersController < ApplicationController
     private
 
         def passenger_params
-            params.expect(passenger: [:name, :email])
+            params.expect(passenger: [:name, :email, :booking_id])
         end
 end

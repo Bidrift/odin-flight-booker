@@ -7,5 +7,27 @@
 
 <div style="border: 1px solid black; margin: 10px 10px; padding: 20px;">
     <h2>Passengers information</h2>
-    <%= render @booking.passengers %>
+    <div id="passengers-list">
+        <%= render @booking.passengers.select(&:persisted?) %>
+    </div>
+
+    <div data-controller="passenger-adder">
+        <template data-passenger-adder-target="new" id="new-passenger-temp">
+            <div>
+                <button data-action="passenger-adder#showForm">New passenger</button>
+            </div>
+        </template>
+        <template data-passenger-adder-target="form" id="new-passenger-form-temp">
+            <div>
+                <div id="new-passenger-form-container">
+                    <%= form_with model: @passenger, data: { action: "passenger-adder#submitForm" }, id: "passenger-form" do |passenger_form| %>
+                        <%= passenger_form.hidden_field :booking_id, value: @passenger.booking_id %>
+                        <%= render partial: "passengers/form", locals: { f: passenger_form } %>
+                        <%= passenger_form.submit "Add passenger" %>
+                    <% end %>
+                </div>
+                <button data-action="passenger-adder#hideForm">Cancel</button>
+            </div>
+        </template>
+    </div>
 </div>
