@@ -9,10 +9,29 @@
     <%= form_with model: @booking do |form| %>
         <%= form.hidden_field :passengers_count, value: @booking.passengers.size %>
         <%= form.hidden_field :flight_id, value: @booking.flight_id %>
-            <%= form.fields_for :passengers do |passenger_form| %>
-                <h3>Passenger <%= passenger_form.index + 1 %></h3>
-                <%= render partial: 'passengers/form', locals: { f: passenger_form } %>
-            <% end %>
+        <div data-controller="booking" data-booking-number-value=<%= @booking.passengers.size %>>
+            <template data-booking-target="template">
+                <div>
+                    <h3>Passenger <span data-booking-target="number"></span></h3>
+                    <div>
+                        <p>
+                            <label data-booking-target="nameLabel" for="booking_passengers_attributes_0_name">Passenger name</label>
+                            <input data-booking-target="nameInput" required="required" minlength="4" maxlength="16" size="16" type="text" name="booking[passengers_attributes][0][name]" id="booking_passengers_attributes_0_name">
+                        </p>
+                        <p>
+                            <label data-booking-target="emailLabel" for="booking_passengers_attributes_0_email">Passenger email</label>
+                            <input data-booking-target="emailInput" required="required" type="email" name="booking[passengers_attributes][0][email]" id="booking_passengers_attributes_0_email">
+                        </p>
+                    </div>
+                </div>
+            </template>
+            <template data-booking-target="removeTemplate">
+                <button type="button" data-booking-target="removeButton" data-action="booking#removePassenger">Remove passenger</button>
+            </template>
+            <template data-booking-target="buttonTemplate">
+                <button type="button" data-booking-target="addButton" data-action="booking#addPassenger">Add passenger</button>
+            </template>
+        </div>
         <%= form.submit "Confirm Booking"%>
     <% end %>
 </div>
