@@ -18,6 +18,9 @@ class BookingsController < ApplicationController
         @booking = Booking.new(booking_create_params)
         @passengers_count = booking_params[:passengers_count]
         if @booking.save
+            @booking.passengers.each do |passenger|
+                PassengerMailer.with(passenger: passenger, url: booking_url(@booking)).confirm_booking.deliver_later
+            end
             redirect_to booking_path @booking
         else
             render :new, status: :unprocessable_entity
