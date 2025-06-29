@@ -11,7 +11,7 @@
         <%= form.hidden_field :flight_id, value: @booking.flight_id %>
         <div data-controller="booking" data-booking-number-value=<%= @booking.passengers.size %>>
             <template data-booking-target="template">
-                <div>
+                <div data-booking-target="passengerContainer">
                     <h3>Passenger <span data-booking-target="number"></span></h3>
                     <div>
                         <p>

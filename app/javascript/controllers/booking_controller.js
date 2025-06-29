@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-    static targets = [ "template", "addButton", "removeButton", "buttonTemplate", "removeTemplate", "number", "nameLabel", "nameInput", "emailLabel", "emailInput" ]
+    static targets = [ "template", "passengerContainer", "addButton", "removeButton", "buttonTemplate", "removeTemplate", "number", "nameLabel", "nameInput", "emailLabel", "emailInput" ]
     static values = { number: Number }
 
     connect() {
@@ -23,6 +23,20 @@ export default class extends Controller {
             }
             if (this.numberValue == 4) {
                 this.hideAddButton()
+            }
+        }
+    }
+
+    removePassenger() {
+        const getLast = (a) => a[a.length-1]
+        this.element.removeChild(getLast(this.passengerContainerTargets))
+        if (this.hasNumberValue) {
+            this.numberValue--
+            if (this.numberValue == 1) {
+                this.hideRemoveButton()
+            }
+            if (this.numberValue == 3) {
+                this.showAddButton()
             }
         }
     }
