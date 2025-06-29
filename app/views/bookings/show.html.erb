@@ -11,7 +11,7 @@
         <%= render @booking.passengers.select(&:persisted?) %>
     </div>
 
-    <div data-controller="passenger-adder">
+    <div data-controller="passenger-adder" data-passenger-adder-number-value="<%= @booking.passengers.select(&:persisted?).size %>">
         <template data-passenger-adder-target="new" id="new-passenger-temp">
             <div>
                 <button data-action="passenger-adder#showForm">New passenger</button>

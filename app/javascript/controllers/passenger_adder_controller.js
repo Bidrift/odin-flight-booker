@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
     static targets = [ "new", "form" ]
+    static values = { number: Number }
 
     connect() {
         this.cloneNewTarget()
@@ -20,11 +21,15 @@ export default class extends Controller {
     submitForm(event) {
         this.cloneNewTarget()
         this.element.removeChild(event.target.parentElement.parentElement)
+        this.numberValue++
     }
 
     cloneNewTarget() {
-        const newClone = this.newTarget.content.cloneNode(true)
-        this.element.appendChild(newClone)
+        console.log(this.numberValue)
+        if (this.hasNumberValue && this.numberValue < 4) {
+            const newClone = this.newTarget.content.cloneNode(true)
+            this.element.appendChild(newClone)
+        }
     }
 
     cloneFormTarget() {
