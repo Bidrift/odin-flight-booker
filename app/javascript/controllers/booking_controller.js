@@ -79,7 +79,6 @@ export default class extends Controller {
         if (this.hasNumberTarget) {
             getLast(this.numberTargets).innerHTML = this.numberValue + 1
         }
-        console.log(this.nameLabelTarget.getAttribute("for"))
         if (this.hasNameLabelTarget) {
             getLast(this.nameLabelTargets).setAttribute("for", `booking_passengers_attributes_${this.numberValue}_name`)
         }

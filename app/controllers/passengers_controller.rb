@@ -5,7 +5,6 @@ class PassengersController < ApplicationController
             if @passenger.save
                 format.turbo_stream { render turbo_stream: [turbo_stream.append('passengers-list', @passenger)]}
             else
-                logger.debug(@passenger.errors.full_messages)
                 format.turbo_stream { head(:unprocessable_entity) }
             end
         end
