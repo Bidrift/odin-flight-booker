@@ -1,0 +1,19 @@
+<h1>Dear passenger <%= @passenger.name %></h1>
+
+<div>
+    <h2>Booking confirmed!</h2>
+    <p>You have successfully booked a flight to <%= @passenger.booking.flight.arrival_airport.code %>.</p>
+    <p>This email is a confirmation of your booking, to manage and view details of your booking, please <%= link_to "click here", @url %>.</p>
+</div>
+
+<div>
+    <h2>Booking details</h2>
+    <%= render partial: 'flights/flight', locals: { flight: @passenger.booking.flight } %>
+    
+    <p>For your own convenience, we recommend that you arrive to the airport <strong>3 hours prior</strong> to your departure time in case of international flights and <strong>2 hours prior</strong> in case of domestic flights.</p>
+</div>
+
+<div>
+    <p>With regards,</p>
+    <p><em>The flight booker company</em></p>
+</div>

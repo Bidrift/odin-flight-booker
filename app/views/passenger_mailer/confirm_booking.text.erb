@@ -1,0 +1,24 @@
+Dear passenger <%= @passenger.name %>
+
+<% flight = @passenger.booking.flight %>
+Booking confirmed!
+You have successfully booked a flight to <%= flight.arrival_airport.code %>.
+This email is a confirmation of your booking, to manage and view details of your booking, please visit this link: <%= @url %>
+
+Booking details
+Flight number: <%= flight.id %>
+Departure airport: <%= flight.departure_airport.code %>
+Arrival airport: <%= flight.arrival_airport.code %>
+Departure time: <%= flight.departure_time.strftime("%H:%M") %> on <%= flight.departure_time.strftime("%d %b %Y, %a") %>
+<% duration_converted = Time.at(flight.duration.minutes - 1.day).utc %>
+<% duration_text = Array.new %>
+<% duration_text.push(pluralize(duration_converted.day, 'day')) if duration_converted.day != 31 %>
+<% duration_text.push(pluralize(duration_converted.hour, 'hour')) if duration_converted.hour != 0 %>
+<% duration_text.push(pluralize(duration_converted.min, 'minute')) if duration_converted.min != 0 %>
+<%= duration_text.join(" and ") %>
+Duration of flight: <%= duration_text %>
+
+For your own convenience, we recommend that you arrive to the airport 3 hours prior to your departure time in case of international flights and 2 hours prior in case of domestic flights.
+
+With regards,
+The flight booker company
