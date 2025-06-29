@@ -3,7 +3,10 @@ class PassengersController < ApplicationController
         @passenger = Passenger.new(passenger_params)
         respond_to do |format|
             if @passenger.save
-                format.turbo_stream { render turbo_stream: [ turbo_stream.append("passengers-list", @passenger) ] }
+                format.turbo_stream do 
+                    PassengerMailer.with(passenger: @passenger, url: booking_url(@passenger.booking)).confirm_booking.deliver_later
+                    render turbo_stream: [ turbo_stream.append("passengers-list", @passenger) ]
+                end
             else
                 format.turbo_stream { head(:unprocessable_entity) }
             end
