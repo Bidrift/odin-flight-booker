@@ -1,4 +1,4 @@
-<h1>New booking for flight #<%= @booking.flight_id %> with <%= pluralize(@passengers_count, 'passenger') %></h1>
+<h1>New booking for flight #<%= @booking.flight_id %></h1>
 <div style="border: 1px solid black; margin: 10px 10px; padding: 20px;">
     <h2>Flight information</h2>
     <%= render partial: "flights/flight", locals: { flight: @booking.flight } %>

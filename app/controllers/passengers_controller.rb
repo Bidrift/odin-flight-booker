@@ -3,10 +3,10 @@ class PassengersController < ApplicationController
         @passenger = Passenger.new(passenger_params)
         respond_to do |format|
             if @passenger.save
-                format.turbo_stream { render turbo_stream: [turbo_stream.append('passengers-list', @passenger), ]}
+                format.turbo_stream { render turbo_stream: [turbo_stream.append('passengers-list', @passenger)]}
             else
                 logger.debug(@passenger.errors.full_messages)
-                head(:unprocessable_entity)
+                format.turbo_stream { head(:unprocessable_entity) }
             end
         end
         
