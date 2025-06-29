@@ -7,8 +7,8 @@ class BookingsController < ApplicationController
         end
         @booking = Booking.new(flight_id: booking_params[:flight_id])
         @passengers_count = booking_params[:passengers_count]
-        @passengers_count.to_i.times { @booking.passengers.build }
-        if @booking.invalid?
+        @passengers_count.to_i.times { @booking.passengers.build(name: "Name", email: "j.doe@ex.ample") }
+        if @booking.invalid?(:fresh)
             flash["alert"] = @booking.errors.full_messages.join("\n")
             redirect_to flights_path
         end

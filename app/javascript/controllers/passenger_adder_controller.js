@@ -19,13 +19,12 @@ export default class extends Controller {
     }
 
     submitForm(event) {
+        this.numberValue++
         this.cloneNewTarget()
         this.element.removeChild(event.target.parentElement.parentElement)
-        this.numberValue++
     }
 
     cloneNewTarget() {
-        console.log(this.numberValue)
         if (this.hasNumberValue && this.numberValue < 4) {
             const newClone = this.newTarget.content.cloneNode(true)
             this.element.appendChild(newClone)

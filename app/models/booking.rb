@@ -2,9 +2,9 @@ class Booking < ApplicationRecord
   belongs_to :flight
   has_many :passengers
 
-  validate :has_passengers
+  validate :has_passengers, on: :fresh
 
-  validate :has_no_more_than_4_passengers
+  validate :has_no_more_than_4_passengers, on: :fresh
 
   accepts_nested_attributes_for :passengers
 
