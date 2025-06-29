@@ -37,7 +37,7 @@ Rails.application.configure do
   # Deliver using letter_opener in development
   config.action_mailer.delivery_method = :letter_opener
 
-  # Do deliveries 
+  # Do deliveries
   config.action_mailer.perform_deliveries = true
 
   # Make template changes take effect immediately.
