@@ -9,7 +9,10 @@ In this app, you can:
 - Search for flights based on Departure and Arrival Airport, Departure Time, and number of passengers.
 - Select a flight and proceed to booking
 - Enter passengers' information
+- Add/remove passengers during booking
 - Check your booking (no search function for it)
+- Add passengers during booking management
+- Email booking and passenger confirmations (local in development)
 
 # Technical features
 
@@ -18,6 +21,9 @@ In this app, there are a few technical features that ensure a smooth flow of the
 - During the search, all the parameters are validated and checked before giving a list of flights
 - During the booking phase, all parameters are validated and the application handles everything with only one form
 - To manage your booking, you have to remember your Booking id and use the router `/bookings/:id`
+- During passenger addition and removal, the minimum limit is 1 and the maximum limit is 4. This is validated both on the front end and the backend.
+- All validations are made both on the client and server side, as well as routing validations.
+- Booking management and passenger addition and removal during booking is handled using Stimulus and Turbo streams
 
 # How to run
 
@@ -44,6 +50,8 @@ During the development of this project, I used the following stack:
 
 - Ruby on Rails: `8.0.2v`
 - Gem [simple_form](https://github.com/heartcombo/simple_form)
+- Stimulus and Turbo
+- Mailers
 
 # Demo (screenshots)
 
@@ -57,8 +65,16 @@ During the development of this project, I used the following stack:
 
 - Booking form
 
-![booking form](https://i.imgur.com/SyKFQXi.png)
+![booking form](https://i.imgur.com/0bmbwhG.png)
 
 - Booking information
 
 ![booking info](https://i.imgur.com/7kp4dTc.png)
+
+- Booking management (passenger addition)
+
+![booking manager](https://i.imgur.com/8Ttn5Q1.png)
+
+- Booking confirmation email
+
+![email preview](https://i.imgur.com/cPrm1HE.png)
